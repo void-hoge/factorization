@@ -39,17 +39,19 @@ std::vector<unsigned> factorize(uint64_t n, const int base_prime_num) {
 		}
 	}
 
-	uint64_t d = get_divisor(1, base, base_max);
-	for (uint64_t i = 1; d*d <= n;) {
-		if (n % d == 0) {
-			n /= d;
-			result.push_back(d);
-		}else {
-			i++;
-			d = get_divisor(i, base, base_max);
+	if (n != 1) {
+		uint64_t d = get_divisor(1, base, base_max);
+		for (uint64_t i = 1; d*d <= n;) {
+			if (n % d == 0) {
+				n /= d;
+				result.push_back(d);
+			}else {
+				i++;
+				d = get_divisor(i, base, base_max);
+			}
 		}
+		result.push_back(n);
 	}
-	result.push_back(n);
 	return result;
 }
 
